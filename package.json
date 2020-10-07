@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/alvarhonsi/Vaffelbot#readme",
   "dependencies": {
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.3.1",
+    "google-spreadsheet": "^3.0.13",
+    "googleapis": "^39.2.0"
   }
 }
