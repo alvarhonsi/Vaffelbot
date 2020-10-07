@@ -28,6 +28,13 @@ client.on("message", (message) => {
     switch (command) {
         case "ping":
             client.commands.get("ping").execute(message, args);
+            break;
+        case "vaffel":
+            client.commands.get("vaffel").execute(message, args);
+            break;
+        case "stekt":
+            client.commands.get("stekt").execute(message, args);
+            break;
     }
 });
 

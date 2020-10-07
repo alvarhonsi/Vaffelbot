@@ -1,5 +1,16 @@
+module.exports = {
+    async insertRow(row) {
+        const { waffle_queue } = await accessSpreadsheet();
+
+        await waffle_queue.addRow(row);
+    },
+    async getSheets() {
+        const { waffle_queue, in_stock } = await accessSpreadsheet();
+        return waffle_queue, in_stock;
+    },
+};
+
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const { promisify } = require("util");
 
 const creds = require("./client_secret.json");
 
@@ -9,8 +20,7 @@ const accessSpreadsheet = async () => {
     );
     await doc.useServiceAccountAuth(creds);
     await doc.loadInfo();
-    const sheet = doc.sheetsByIndex[0];
-    console.log(`Title: ${sheet.title}, Rows: ${sheet.rowCount}`);
+    const sheet1 = doc.sheetsByIndex[0];
+    const sheet2 = doc.sheetsByIndex[1];
+    return sheet1, sheet2;
 };
-
-accessSpreadsheet();
