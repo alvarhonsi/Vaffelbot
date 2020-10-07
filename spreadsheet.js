@@ -1,12 +1,37 @@
 module.exports = {
     async insertRow(row) {
-        const { waffle_queue } = await accessSpreadsheet();
-
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
         await waffle_queue.addRow(row);
     },
-    async getSheets() {
-        const { waffle_queue, in_stock } = await accessSpreadsheet();
-        return waffle_queue, in_stock;
+    async getNumWaffles() {
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
+        const rows = await waffle_stock.getRows();
+        return parseInt(rows[0].in_stock, 10);
+    },
+    async incWaffles(i) {
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
+        const rows = await waffle_stock.getRows();
+        rows[0].in_stock = parseInt(rows[0].in_stock, 10) + i;
+        await rows[0].save();
+    },
+    async decWaffles(i) {
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
+        const rows = await waffle_stock.getRows();
+        num = parseInt(rows[0].in_stock, 10);
+        rows[0].in_stock = i < num ? num - i : 0;
+        await rows[0].save();
+    },
+    async numWaiting() {
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
+        const rows = await waffle_queue.getRows();
+        return rows.length;
+    },
+    async removeFirstRow() {
+        const [waffle_queue, waffle_stock] = await accessSpreadsheet();
+        const rows = await waffle_queue.getRows();
+        const row = rows[0];
+        await row.delete();
+        return row;
     },
 };
 
@@ -22,5 +47,5 @@ const accessSpreadsheet = async () => {
     await doc.loadInfo();
     const sheet1 = doc.sheetsByIndex[0];
     const sheet2 = doc.sheetsByIndex[1];
-    return sheet1, sheet2;
+    return [sheet1, sheet2];
 };
