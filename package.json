@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/alvarhonsi/Vaffelbot/issues"
   },
-  "homepage": "https://github.com/alvarhonsi/Vaffelbot#readme"
+  "homepage": "https://github.com/alvarhonsi/Vaffelbot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
 }
