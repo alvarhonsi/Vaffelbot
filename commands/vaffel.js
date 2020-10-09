@@ -11,7 +11,7 @@ module.exports = {
             userInQueue,
             addToRequestBuffer,
             userInBuffer,
-        } = require("../spreadsheet.js");
+        } = require("../api/spreadsheet.js");
 
         const regOrder = async (message) => {
             message.channel.send(

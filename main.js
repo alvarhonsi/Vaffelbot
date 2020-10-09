@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const client = new Discord.Client();
 const { token, prefix } = require("./config.json");
-const { clearBuffer } = require("./spreadsheet");
+const { clearBuffer } = require("./api/spreadsheet");
 
 client.commands = new Discord.Collection();
 const commandFiles = fs

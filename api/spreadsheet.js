@@ -72,7 +72,7 @@ module.exports = {
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
-const creds = require("./client_secret.json");
+const creds = require("../client_secret.json");
 
 const accessSpreadsheet = async () => {
     const doc = new GoogleSpreadsheet(
