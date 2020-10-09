@@ -3,6 +3,7 @@ const fs = require("fs");
 
 const client = new Discord.Client();
 const { token, prefix } = require("./config.json");
+const { clearBuffer } = require("./spreadsheet");
 
 client.commands = new Discord.Collection();
 const commandFiles = fs
@@ -17,6 +18,9 @@ for (const file of commandFiles) {
 
 client.once("ready", () => {
     console.log("Vaffelbot is online!");
+    const interval = setInterval(async () => {
+        await clearBuffer();
+    }, 1 * 300000);
 });
 
 client.on("message", (message) => {
