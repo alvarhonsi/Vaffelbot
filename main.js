@@ -2,9 +2,9 @@ const Discord = require("discord.js");
 const fs = require("fs");
 
 const client = new Discord.Client();
-const { token, prefix } = require("./config.json");
 const { clearBuffer } = require("./api/spreadsheet");
 
+const prefix = process.env.prefix;
 const orakelRole = "Orakel";
 let running = false;
 let interval = null;
@@ -86,4 +86,4 @@ client.on("message", (message) => {
     }
 });
 
-client.login(token);
+client.login(process.env.token);

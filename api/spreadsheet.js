@@ -80,10 +80,8 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const creds = require("../client_secret.json");
 
 const accessSpreadsheet = async () => {
-    const doc = new GoogleSpreadsheet(
-        "1QQxSJt_ea-qCRA3NXg4jJ_CwYHz5mUSjSgZhX499xJQ"
-    );
-    await doc.useServiceAccountAuth(creds);
+    const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEETS_DOCUMENT_ID);
+    await doc.useServiceAccountAuth(process.env.GOOGLE_SHEETS_CREDS);
     await doc.loadInfo();
     const sheets = doc.sheetsByTitle;
     return {
