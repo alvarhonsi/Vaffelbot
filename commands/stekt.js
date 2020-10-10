@@ -27,8 +27,8 @@ module.exports = {
                 const row = await removeFirstRow();
                 const user = await message.client.users.fetch(row.discord_id);
                 user.send(
-                    "Vi har en vaffel klar til deg! Kom og hent den :) \n" +
-                        "Husk å vise denne meldingen når du henter vaffelen din."
+                    ":fork_and_knife: Vi har en vaffel klar til deg! Kom og hent den :slight_smile: \n" +
+                        "Husk å vise denne meldingen når du henter vaffelen din. :fork_and_knife:"
                 );
             }
         };

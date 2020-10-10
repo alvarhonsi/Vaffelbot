@@ -12,7 +12,7 @@ module.exports = {
         en melding om at de kan komme og hente vaffelen sin. Når du henter vaffelen din viser du først meldingen fra vaffelbot
         til oraklene, så får du en vaffel utlevert.
 
-        Takk for at du bidrar til å holde lesesalen smittefri :)
+        Takk for at du bidrar til å holde lesesalen smittefri :slight_smile:
         `);
     },
 };

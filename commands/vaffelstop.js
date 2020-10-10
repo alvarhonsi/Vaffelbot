@@ -6,7 +6,7 @@ module.exports = {
         await clearSheets();
         message.channel.send(
             "@here Da er vaffel stekingen stengt for idag. \n" +
-                "Velkommen igjen neste Vaffel-Torsdag! :)"
+                "Velkommen igjen neste Vaffel-Torsdag! :slight_smile:"
         );
     },
 };
