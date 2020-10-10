@@ -68,6 +68,11 @@ module.exports = {
             await row.delete();
         }
     },
+    async clearSheets() {
+        await clearWaffles();
+        await clearQueue();
+        await clearBuffer();
+    },
 };
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
@@ -86,4 +91,29 @@ const accessSpreadsheet = async () => {
         waffle_stock: sheets.VaffelHaug,
         request_buffer: sheets.RequestBuffer,
     };
+};
+
+const clearWaffles = async () => {
+    const { waffle_stock } = await accessSpreadsheet();
+    const rows = await waffle_stock.getRows();
+    rows[0].in_stock = 0;
+    await rows[0].save();
+};
+
+const clearQueue = async () => {
+    const { waffle_queue } = await accessSpreadsheet();
+    const rows = await waffle_queue.getRows();
+    for (x in rows) {
+        const row = rows[x];
+        await row.delete();
+    }
+};
+
+const clearBuffer = async () => {
+    const { request_buffer } = await accessSpreadsheet();
+    const rows = await request_buffer.getRows();
+    for (x in rows) {
+        const row = rows[x];
+        await row.delete();
+    }
 };

@@ -8,7 +8,7 @@ module.exports = {
             numWaiting,
             incWaffles,
             removeFirstRow,
-        } = require("../spreadsheet");
+        } = require("../api/spreadsheet");
 
         if (args.length < 1 || args === undefined) {
             return;
@@ -26,7 +26,10 @@ module.exports = {
             for (let i = 0; i < num; i++) {
                 const row = await removeFirstRow();
                 const user = await message.client.users.fetch(row.discord_id);
-                user.send("Vi har en vaffel klar til deg! Kom og hent den :)");
+                user.send(
+                    "Vi har en vaffel klar til deg! Kom og hent den :) \n" +
+                        "Husk å vise denne meldingen når du henter vaffelen din."
+                );
             }
         };
 

@@ -41,7 +41,6 @@ module.exports = {
             );
             return;
         } else if (await userInQueue(message.author.id)) {
-            await addToRequestBuffer(message.author.id);
             message.author.send(
                 "Du har allerede en registrert bestilling. Vær tolmodig så sender vi deg en dm når vaffelen din er klar :)"
             );
