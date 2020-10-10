@@ -77,11 +77,12 @@ module.exports = {
 
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
-const creds = require("../client_secret.json");
-
 const accessSpreadsheet = async () => {
     const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEETS_DOCUMENT_ID);
-    await doc.useServiceAccountAuth(process.env.GOOGLE_SHEETS_CREDS);
+    await doc.useServiceAccountAuth({
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY,
+    });
     await doc.loadInfo();
     const sheets = doc.sheetsByTitle;
     return {

@@ -1,6 +1,7 @@
 #Credentials
 config.json
 client_secret.json
+.env
 
 #Dependencies
 /node_modules

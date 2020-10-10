@@ -1,10 +1,11 @@
+require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
 
 const client = new Discord.Client();
 const { clearBuffer } = require("./api/spreadsheet");
 
-const prefix = process.env.prefix;
+const prefix = process.env.PREFIX;
 const orakelRole = "Orakel";
 let running = false;
 let interval = null;
@@ -85,5 +86,4 @@ client.on("message", (message) => {
             break;
     }
 });
-
-client.login(process.env.token);
+client.login(process.env.TOKEN);
