@@ -6,7 +6,7 @@ const client = new Discord.Client();
 const { clearBuffer } = require("./api/spreadsheet");
 
 const prefix = process.env.PREFIX;
-const orakelRole = "Orakel";
+const orakelRole = "orakel";
 let running = false;
 let interval = null;
 
