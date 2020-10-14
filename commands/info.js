@@ -8,7 +8,7 @@ module.exports = {
         Oraklene kommer til å steke vafler på kjøkkenet som normalt, men vi kan ikke ha hele lesesalen stående
         i kø på kjøkkenet. Derfor har vi lappet sammen denne vaffelboten som alternativ til kø.
         
-        Når du bruker !vaffel kommandoen blir du satt i en kø og når oraklene steker vaffler vil de første i køen få
+        Når du bruker $vaffel kommandoen blir du satt i en kø og når oraklene steker vaffler vil de første i køen få
         en melding om at de kan komme og hente vaffelen sin. Når du henter vaffelen din viser du først meldingen fra vaffelbot
         til oraklene, så får du en vaffel utlevert.
 
