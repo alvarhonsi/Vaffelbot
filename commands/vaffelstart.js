@@ -5,7 +5,7 @@ module.exports = {
         const { clearSheets } = require("../api/spreadsheet");
         await clearSheets();
         message.channel.send(`
-        Hei allesammen! Vaffelstekingen er nå satt igang! \n
+        @here Hei allesammen! Vaffelstekingen er nå satt igang! \n
         $vaffel : Bestill en vaffel. \n
         $info : Info om vaffelserveringen. \n
         `);
