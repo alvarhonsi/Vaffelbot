@@ -3,18 +3,24 @@ module.exports = {
     name: "stekt",
     description:
         "Command for signaling that there are waffles ready, sends dm to the people first in line",
-    async execute(message, args) {
+    async execute(message, args, waffleData) {
         const {
             numWaiting,
             incWaffles,
             removeFirstRow,
         } = require("../api/spreadsheet");
+        const { inc_store, reg_sale } = require("../util/state_functions");
+        let { waffleQueue, waffleStore, regOrders, totalSales } = waffleData;
 
         if (args.length < 1 || args === undefined) {
+            message.author.send("--Illegal use of stekt--");
             return;
         }
         const num_waffles = parseInt(args[0], 10);
-        if (!Number.isInteger(num_waffles) || num_waffles > 6) {
+        if (!Number.isInteger(num_waffles) || num_waffles > 10) {
+            message.author.send(
+                "Du har gitt ugyldig input til 'stekt' kommandoen, prøv igjen."
+            );
             return;
         }
 
@@ -24,16 +30,37 @@ module.exports = {
 
         const signalWaiting = async (num) => {
             for (let i = 0; i < num; i++) {
-                const row = await removeFirstRow();
+                /*const row = await removeFirstRow();
                 const user = await message.client.users.fetch(row.discord_id);
                 user.send(
                     ":fork_and_knife: Vi har en vaffel klar til deg! Kom og hent den :slight_smile: \n" +
                         "Husk å vise denne meldingen når du henter vaffelen din. :fork_and_knife:"
+                );*/
+
+                const { name, discordID, date } = waffleQueue.dequeue();
+                const user = await message.client.users.fetch(discordID);
+                user.send(
+                    ":fork_and_knife: Vi har en vaffel klar til deg! Kom og hent den :slight_smile: \n" +
+                        "Husk å vise denne meldingen når du henter vaffelen din. :fork_and_knife:"
                 );
+                reg_sale(waffleData);
+                regOrders.splice(regOrders.indexOf(discordID), 1);
             }
         };
+        const waiting = waffleQueue.size();
+        if (waiting === 0) {
+            console.log(`inc store by ${num_waffles}`);
+            inc_store(waffleData, num_waffles);
+        } else if (waiting > num_waffles) {
+            await signalWaiting(num_waffles);
+        } else {
+            const incr = num_waffles - waiting;
+            console.log(`inc store by ${incr}`);
+            inc_store(waffleData, incr);
+            await signalWaiting(waiting);
+        }
 
-        const waiting = await numWaiting();
+        /*const waiting = await numWaiting();
         if (waiting === 0) {
             await incWaffles(num_waffles);
         } else if (waiting > num_waffles) {
@@ -42,6 +69,6 @@ module.exports = {
             const incr = num_waffles - waiting;
             await signalWaiting(waiting);
             await incWaffles(incr);
-        }
+        }*/
     },
 };

@@ -20,6 +20,7 @@
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "google-spreadsheet": "^3.0.13",
-    "googleapis": "^39.2.0"
+    "googleapis": "^39.2.0",
+    "queue-fifo": "^0.2.6"
   }
 }
