@@ -35,6 +35,7 @@ client.once("ready", () => {
     running = false;
 });
 
+//TODO: set running inn i waffleData og flytt all logikk rundt commands in i command filene
 client.on("message", (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -44,6 +45,7 @@ client.on("message", (message) => {
     switch (command) {
         case "vaffel":
             if (!running) {
+                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
                 return;
             }
             client.commands.get("vaffel").execute(message, args, waffleData);
@@ -62,7 +64,11 @@ client.on("message", (message) => {
             }
             break;
         case "vaffelstart":
-            if (running || message.guild === null) {
+            if (running) {
+                message.channel.send("Det pågår allerede et vaffelsalg");
+                return;
+            }
+            if (message.guild === null) {
                 message.author.send("--Illegal use of vaffelstart--");
                 return;
             }
@@ -82,7 +88,11 @@ client.on("message", (message) => {
             }
             break;
         case "vaffelstop":
-            if (!running || message.guild === null || message.member === null) {
+            if (!running) {
+                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
+                return;
+            }
+            if (message.guild === null) {
                 message.author.send("--Illegal use of vaffelstop--");
                 return;
             }
@@ -108,6 +118,7 @@ client.on("message", (message) => {
         case "kø":
             if (!running) {
                 message.channel.send("Det er for øyeblikket ikke vaffelsalg");
+                return;
             }
             client.commands.get("kø").execute(message, args, waffleData);
             break;
