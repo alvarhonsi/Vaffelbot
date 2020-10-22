@@ -4,11 +4,10 @@ const fs = require("fs");
 const Queue = require("queue-fifo");
 
 const client = new Discord.Client();
-const { clearBuffer } = require("./api/spreadsheet");
 const { clear_req_buffer } = require("./util/state_functions");
 
 const prefix = process.env.PREFIX;
-const orakelRole = "orakel";
+const orakelRole = process.env.ORAKELROLE;
 let running = false;
 let interval = null;
 waffleData = {
@@ -124,6 +123,9 @@ client.on("message", (message) => {
             break;
         case "info":
             client.commands.get("info").execute(message, args);
+            break;
+        case "hjelp":
+            client.commands.get("hjelp").execute(message, args);
             break;
     }
     console.log(waffleData["waffleStore"]);
