@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config()
 const Discord = require("discord.js");
 const fs = require("fs");
 const Queue = require("queue-fifo");
@@ -7,7 +7,8 @@ const client = new Discord.Client();
 const { clear_req_buffer } = require("./util/state_functions");
 
 const prefix = process.env.PREFIX;
-const orakelRole = process.env.ORAKELROLE;
+const adminRole = process.env.ADMIN_ROLE;
+console.log(adminRole)
 let running = false;
 let interval = null;
 waffleData = {
@@ -54,7 +55,7 @@ client.on("message", (message) => {
                 message.author.send("--Illegal use of stekt--");
                 return;
             }
-            if (message.member.roles.cache.some((r) => r.name === orakelRole)) {
+            if (message.member.roles.cache.some((r) => r.name === adminRole)) {
                 client.commands.get("stekt").execute(message, args, waffleData);
             } else {
                 message.author.send(
@@ -71,7 +72,7 @@ client.on("message", (message) => {
                 message.author.send("--Illegal use of vaffelstart--");
                 return;
             }
-            if (message.member.roles.cache.some((r) => r.name === orakelRole)) {
+            if (message.member.roles.cache.some((r) => r.name === adminRole)) {
                 client.commands
                     .get("vaffelstart")
                     .execute(message, args, waffleData);
@@ -95,7 +96,7 @@ client.on("message", (message) => {
                 message.author.send("--Illegal use of vaffelstop--");
                 return;
             }
-            if (message.member.roles.cache.some((r) => r.name == orakelRole)) {
+            if (message.member.roles.cache.some((r) => r.name == adminRole)) {
                 client.commands
                     .get("vaffelstop")
                     .execute(message, args, waffleData);
@@ -128,7 +129,5 @@ client.on("message", (message) => {
             client.commands.get("hjelp").execute(message, args);
             break;
     }
-    console.log(waffleData["waffleStore"]);
-    console.log(waffleData["regOrders"]);
 });
 client.login(process.env.TOKEN);
