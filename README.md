@@ -20,7 +20,7 @@ To clone the repository and install dependencies run:
 You can now start development. To start the bot simply run ```node main.js```. The bot will then be hosted locally on your machine, and it can be added to a discord server for testing. If you have already created a bot-application on the discord developer portal, then you can follow this [guide](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#bot-invite-links) for how to add the bot to a server. 
 
 ### How to contribute
-If you have followed the steps above and want to contribute to the project, you can create a pull request to the <b>develop</b> branch. We will then review the code and give feedback if any changes are needed. If there are no problems with the code it will be merged into the development branch and later merged into the main branch for deployment. :rocket:
+If you have followed the steps above and want to contribute to the project, you can fork the project. When you have commited your new changes you can create a pull request to the <b>develop</b> branch. We will then review the code and give feedback if any changes are needed. If there are no problems with the code it will be merged into the development branch and later merged into the main branch for deployment. :rocket:
 
 ## Useful links
 https://discordjs.guide/
