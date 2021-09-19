@@ -1,6 +1,6 @@
 module.exports = {
     name: "vaffelstart",
-    description: "Command for announcing the start of a waffle-sale",
+    description: "Command for announcing the start of a sale",
     async execute(message, args, botState) {
         const { clear_sale_data, clear_req_buffer } = require("../util/state_functions");
         const { adminRole } = botState
@@ -10,13 +10,13 @@ module.exports = {
             return;
         }
         if (botState.saleOngoing) {
-            message.channel.send("Det pågår allerede et vaffelsalg");
+            message.channel.send("Vaffelsalget pågår");
             return;
         }
 
         if (!message.member.roles.cache.some((r) => r.name === adminRole)) {
             message.author.send(
-                "Du har desverre ikke tillatelse til å bruke vaffelstart kommandoen"
+                "--No permission to use $vaffelstart--"
             );
             return
         }
@@ -30,10 +30,9 @@ module.exports = {
         botState.takingOrders = true;
 
         message.channel.send(`
-        @here Hei allesammen! Vaffelstekingen er nå satt igang!
-        \n  $vaffel : Bestill en vaffel.
-        \n  $info : Info om vaffelserveringen.
-        \n  $hjelp : oversikt over gyldige kommandoer.
+        @here\nHei allesammen! Vaffelstekingen er nå satt igang!
+        > $vaffel : Bestill en vaffel.
+        > $hjelp : Oversikt over kommandoer.
         `);
     },
 };

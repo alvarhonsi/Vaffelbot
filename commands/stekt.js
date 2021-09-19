@@ -13,7 +13,7 @@ module.exports = {
         }
         if (!message.member.roles.cache.some((r) => r.name === adminRole)) {
             message.author.send(
-                "Du har desverre ikke tillatelse til å bruke stekt kommandoen"
+                "--No permission to use $stekt--"
             );
             return;
         }
@@ -21,14 +21,10 @@ module.exports = {
         const num_waffles = parseInt(args[0], 10);
         if (!Number.isInteger(num_waffles) || num_waffles > 10) {
             message.author.send(
-                "Du har gitt ugyldig input til 'stekt' kommandoen, prøv igjen."
+                "--Bad input, argument must be a single digit--"
             );
             return;
         }
-
-        message.channel.send(
-            `Våre fantastiske orakler har stekt ${args[0]} nye vaffler!`
-        );
 
         const signalWaiting = async (num) => {
             for (let i = 0; i < num; i++) {
@@ -44,7 +40,6 @@ module.exports = {
 
         const waiting = queue.size();
         if (waiting === 0) {
-            console.log(`inc store by ${num_waffles}`);
             saleData.store = store + num_waffles;
         } else if (waiting > num_waffles) {
             await signalWaiting(num_waffles);

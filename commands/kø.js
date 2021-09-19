@@ -6,12 +6,10 @@ module.exports = {
         const { queue } = saleData
 
         if (!saleOngoing) {
-            message.channel.send("Det er for øyeblikket ikke vaffelsalg");
+            message.channel.send("Salget er ikke startet");
             return;
         }
 
-        message.channel.send(`
-        Vi har for øyeblikket ${queue.size()} stk i køen.
-        `);
+        message.channel.send(`${queue.size()} stk i kø.`);
     },
 };

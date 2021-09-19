@@ -5,11 +5,9 @@ module.exports = {
         const { saleOngoing, saleData } = botState
         const { totalSales } = saleData
         if (!saleOngoing) {
-            message.channel.send("Det er for øyeblikket ikke vaffelsalg");
+            message.channel.send("Salget er ikke startet");
             return;
         }
-        message.channel.send(`
-        Vaffler utdelt idag: ${totalSales}
-        `);
+        message.channel.send(`Vaffler utdelt idag: ${totalSales}`);
     },
 };

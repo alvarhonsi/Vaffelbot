@@ -40,7 +40,7 @@ module.exports = {
             message.channel.send("Vi har ikke opnet for bestillinger.");
         } else if (regOrders.includes(message.author.id)) {
             message.author.send(
-                "Du har allerede en registrert bestilling. Vær tolmodig så sender vi deg en dm når vaffelen din er klar :slight_smile:"
+                "Du har allerede en registrert bestilling."
             );
         } else if (reqBuffer.includes(message.author.id)) {
             message.author.send(
