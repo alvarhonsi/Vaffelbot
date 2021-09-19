@@ -1,21 +1,17 @@
 module.exports = {
-    clear_state(waffleData) {
+    clear_sale_data(botState) {
         const Queue = require("queue-fifo");
 
-        waffleData["waffleQueue"] = new Queue();
-        waffleData["waffleStore"] = 0;
-        waffleData["regOrders"] = [];
-        waffleData["reqBuffer"] = [];
-        waffleData["totalSales"] = 0;
+        botState.saleData = {
+            queue: new Queue(),
+            store: 0,
+            regOrders: [],
+            reqBuffer: [],
+            totalSales: 0,
+        }
     },
-    clear_req_buffer(waffleData) {
-        let { reqBuffer } = waffleData;
+    clear_req_buffer(botState) {
+        let { reqBuffer } = botState.saleData;
         reqBuffer = [];
-    },
-    inc_store(waffleData, num) {
-        waffleData["waffleStore"] = waffleData["waffleStore"] + num;
-    },
-    reg_sale(waffleData) {
-        waffleData["totalSales"] = waffleData["totalSales"] + 1;
     },
 };
