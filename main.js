@@ -4,21 +4,28 @@ const fs = require("fs");
 const Queue = require("queue-fifo");
 
 const client = new Discord.Client();
-const { clear_req_buffer } = require("./util/state_functions");
 
-const prefix = process.env.PREFIX;
-const adminRole = process.env.ADMIN_ROLE;
-console.log(adminRole)
-let running = false;
-let interval = null;
-waffleData = {
-    waffleQueue: new Queue(),
-    waffleStore: 0,
-    regOrders: [],
-    reqBuffer: [],
-    totalSales: 0,
-};
+const PREFIX = '$';
+const ADMINROLE = 'orakel';
 
+let botState = {
+    adminRole: ADMINROLE,
+    prefix: PREFIX,
+    saleOngoing: false,
+    takingOrders: false,
+    bufferInterval: null,
+    saleData: {
+        queue: new Queue(),
+        store: 0,
+        regOrders: [],
+        reqBuffer: [],
+        totalSales: 0,
+    },
+}
+
+/* 
+    Load commands from ./commands
+*/
 client.commands = new Discord.Collection();
 const commandFiles = fs
     .readdirSync("./commands")
@@ -32,11 +39,14 @@ for (const file of commandFiles) {
 
 client.once("ready", () => {
     console.log("Vaffelbot is online!");
-    running = false;
 });
 
-//TODO: set running inn i waffleData og flytt all logikk rundt commands in i command filene
+/* 
+    Listen for commands, and execute if matching command is found.
+*/
 client.on("message", (message) => {
+    console.log(botState)
+    const { adminRole, prefix } = botState
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -44,89 +54,28 @@ client.on("message", (message) => {
 
     switch (command) {
         case "vaffel":
-            if (!running) {
-                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
-                return;
-            }
-            client.commands.get("vaffel").execute(message, args, waffleData);
+            client.commands.get("vaffel").execute(message, args, botState);
             break;
         case "stekt":
-            if (!running || message.guild === null) {
-                message.author.send("--Illegal use of stekt--");
-                return;
-            }
-            if (message.member.roles.cache.some((r) => r.name === adminRole)) {
-                client.commands.get("stekt").execute(message, args, waffleData);
-            } else {
-                message.author.send(
-                    "Du har desverre ikke tillatelse til å bruke stekt kommandoen"
-                );
-            }
+            client.commands.get("stekt").execute(message, args, botState);
             break;
         case "vaffelstart":
-            if (running) {
-                message.channel.send("Det pågår allerede et vaffelsalg");
-                return;
-            }
-            if (message.guild === null) {
-                message.author.send("--Illegal use of vaffelstart--");
-                return;
-            }
-            if (message.member.roles.cache.some((r) => r.name === adminRole)) {
-                client.commands
-                    .get("vaffelstart")
-                    .execute(message, args, waffleData);
-                running = true;
-                interval = setInterval(async () => {
-                    //await clearBuffer();
-                    clear_req_buffer(waffleData);
-                }, 1 * 120000);
-            } else {
-                message.author.send(
-                    "Du har desverre ikke tillatelse til å bruke vaffelstart kommandoen"
-                );
-            }
+            client.commands.get("vaffelstart").execute(message, args, botState);
             break;
         case "vaffelstop":
-            if (!running) {
-                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
-                return;
-            }
-            if (message.guild === null) {
-                message.author.send("--Illegal use of vaffelstop--");
-                return;
-            }
-            if (message.member.roles.cache.some((r) => r.name == adminRole)) {
-                client.commands
-                    .get("vaffelstop")
-                    .execute(message, args, waffleData);
-                running = false;
-                clearInterval(interval);
-            } else {
-                message.author.send(
-                    "Du har desverre ikke tillatelse til å bruke vaffelstop kommandoen"
-                );
-            }
+            client.commands.get("vaffelstop").execute(message, args, botState);
             break;
         case "salg":
-            if (!running) {
-                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
-                return;
-            }
-            client.commands.get("salg").execute(message, args, waffleData);
+            client.commands.get("salg").execute(message, args, botState);
             break;
         case "kø":
-            if (!running) {
-                message.channel.send("Det er for øyeblikket ikke vaffelsalg");
-                return;
-            }
-            client.commands.get("kø").execute(message, args, waffleData);
+            client.commands.get("kø").execute(message, args, botState);
             break;
         case "info":
             client.commands.get("info").execute(message, args);
             break;
         case "hjelp":
-            client.commands.get("hjelp").execute(message, args);
+            client.commands.get("hjelp").execute(message, args, botState);
             break;
     }
 });
