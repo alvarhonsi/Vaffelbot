@@ -37,7 +37,7 @@ module.exports = {
         };
 
         if (!botState.saleOngoing) {
-            message.channel.send("Vi har ikke opnet for bestillinger.");
+            message.channel.send("Vi har ikke åpnet for bestillinger.");
         } else if (regOrders.includes(message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."
