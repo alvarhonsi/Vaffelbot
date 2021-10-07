@@ -16,13 +16,13 @@ module.exports = {
 
         const regOrder = async (message) => {
             message.channel.send(
-                `Takk for bestillingen ${message.author.username}! Du får en dm når du kan komme og hente vaffelen din :slight_smile:`
+                `Takk for bestillingen ${message.author.username}!`
             );
 
             if (store > 0) {
                 saleData.store = store - 1;
                 message.author.send(
-                    ":fork_and_knife: Vi har en vaffel til deg! Kom og hent :fork_and_knife:"
+                    ":fork_and_knife: Vi har en vaffel til deg! :fork_and_knife:"
                 );
                 saleData.totalSales = totalSales + 1;
             } else {
@@ -37,7 +37,7 @@ module.exports = {
         };
 
         if (!botState.saleOngoing) {
-            message.channel.send("Vi har ikke opnet for bestillinger.");
+            message.channel.send("Vi har ikke åpnet for bestillinger.");
         } else if (regOrders.includes(message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."
