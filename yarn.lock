@@ -84,13 +84,6 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
-dbly-linked-list@0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/dbly-linked-list/-/dbly-linked-list-0.3.4.tgz#e4f85b79f303808d01a19336c9475abd0aa4f82e"
-  integrity sha512-327vOlwspi9i1T3Kc9yZhRUR8qDdgMQ4HmXsFDDCQ/HTc3sNe7gnF5b0UrsnaOJ0rvmG7yBZpK0NoOux9rKYKw==
-  dependencies:
-    lodash.isequal "^4.5.0"
-
 debug@4:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
@@ -394,11 +387,6 @@ jws@^4.0.0:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
 
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
-
 lodash@^4.17.20:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
@@ -476,13 +464,6 @@ qs@^6.5.2:
   integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
   dependencies:
     side-channel "^1.0.4"
-
-queue-fifo@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/queue-fifo/-/queue-fifo-0.2.6.tgz#6438814581e7a6d31074202beaa1bd7726b76501"
-  integrity sha512-rwlnZHAaTmWEGKC7ziasK8u4QnZW/uN6kSiG+tHNf/1GA+R32FArZi18s3SYUpKcA0Y6jJoUDn5GT3Anoc2mWw==
-  dependencies:
-    dbly-linked-list "0.3.4"
 
 safe-buffer@^5.0.1:
   version "5.2.1"

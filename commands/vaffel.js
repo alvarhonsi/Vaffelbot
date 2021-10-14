@@ -9,7 +9,6 @@ module.exports = {
         let {
             queue,
             store,
-            regOrders,
             reqBuffer,
             totalSales,
         } = saleData;
@@ -32,13 +31,12 @@ module.exports = {
                     date: message.createdAt.toDateString(),
                 };
                 queue.enqueue(order);
-                regOrders.push(message.author.id);
             }
         };
 
         if (!botState.saleOngoing) {
             message.channel.send("Vi har ikke åpnet for bestillinger.");
-        } else if (regOrders.includes(message.author.id)) {
+        } else if (queue.some(({ name, discordID, date }) => discordID === message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."
             );

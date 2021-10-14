@@ -1,7 +1,13 @@
 require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
-const Queue = require("queue-fifo");
+
+// A queue is just a basic array with push() and shift() as enqueue() and dequeue() respectively
+class Queue extends Array {
+    enqueue = Array.push
+    dequeue = Array.shift
+    size() { return this.length; }
+}
 
 const client = new Discord.Client();
 
@@ -17,7 +23,6 @@ let botState = {
     saleData: {
         queue: new Queue(),
         store: 0,
-        regOrders: [],
         reqBuffer: [],
         totalSales: 0,
     },

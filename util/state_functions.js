@@ -5,7 +5,6 @@ module.exports = {
         botState.saleData = {
             queue: new Queue(),
             store: 0,
-            regOrders: [],
             reqBuffer: [],
             totalSales: 0,
         }
