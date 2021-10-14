@@ -75,6 +75,7 @@ client.on("message", (message) => {
             client.commands.get("info").execute(message, args);
             break;
         case "hjelp":
+        case "help":
             client.commands.get("hjelp").execute(message, args, botState);
             break;
     }
