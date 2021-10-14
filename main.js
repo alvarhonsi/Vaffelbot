@@ -1,13 +1,7 @@
 require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
-
-// A queue is just a basic array with push() and shift() as enqueue() and dequeue() respectively
-class Queue extends Array {
-    enqueue = Array.push
-    dequeue = Array.shift
-    size() { return this.length; }
-}
+const Queue = require("./util/queue");
 
 const client = new Discord.Client();
 
@@ -74,7 +68,11 @@ client.on("message", (message) => {
             client.commands.get("salg").execute(message, args, botState);
             break;
         case "kø":
+        case "forran":
             client.commands.get("kø").execute(message, args, botState);
+            break;
+        case "totalkø":
+            client.commands.get("totalkø").execute(message, args, botState);
             break;
         case "info":
             client.commands.get("info").execute(message, args);
