@@ -26,7 +26,8 @@ module.exports = {
         }
         reply += `> ${prefix}vaffel: Bestill en vaffel. \n`
             + `> ${prefix}info: Info om vaffel-torsdag. \n`
-            + `> ${prefix}kø: Antall personer i køen. \n`
+            + `> ${prefix}kø: Antall personer forran deg i køen. \n`
+            + `> ${prefix}totalkø: Antall personer i køen. \n`
             + `> ${prefix}salg: Antall vaffler utgitt iløpet av det gjeldende salget. \n`
 
         message.author.send(reply);
