@@ -5,7 +5,7 @@ module.exports = {
         "Command for signaling that there are waffles ready, sends dm to the people first in line",
     async execute(message, args, botState) {
         const { adminRole, saleData } = botState
-        let { queue, store, regOrders, totalSales } = saleData;
+        let { queue, store, totalSales } = saleData;
 
         if (!botState.saleOngoing || message.guild === null || args.length != 1 || args === undefined) {
             message.author.send("--Illegal use of stekt--");
@@ -34,7 +34,6 @@ module.exports = {
                     ":fork_and_knife: Vi har en vaffel til deg! Kom og hent :fork_and_knife:"
                 );
                 saleData.totalSales = totalSales + 1;
-                regOrders.splice(regOrders.indexOf(discordID), 1);
             }
         };
 

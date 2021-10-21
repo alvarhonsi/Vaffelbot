@@ -9,17 +9,17 @@ module.exports = {
         let {
             queue,
             store,
-            regOrders,
             reqBuffer,
             totalSales,
         } = saleData;
 
         const regOrder = async (message) => {
+            const vaffelAvailable = 0 < store;
             message.channel.send(
-                `Takk for bestillingen ${message.author.username}!`
+                `Takk for bestillingen ${message.author.username}! ${vaffelAvailable ? "En vaffel er allerede klar til deg!" : `Du er nummer ${queue.size()+1} i køen.`}`
             );
 
-            if (store > 0) {
+            if (vaffelAvailable) {
                 saleData.store = store - 1;
                 message.author.send(
                     ":fork_and_knife: Vi har en vaffel til deg! :fork_and_knife:"
@@ -32,13 +32,12 @@ module.exports = {
                     date: message.createdAt.toDateString(),
                 };
                 queue.enqueue(order);
-                regOrders.push(message.author.id);
             }
         };
 
         if (!botState.saleOngoing) {
             message.channel.send("Vi har ikke åpnet for bestillinger.");
-        } else if (regOrders.includes(message.author.id)) {
+        } else if (queue.some(({ name, discordID, date }) => discordID === message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."
             );

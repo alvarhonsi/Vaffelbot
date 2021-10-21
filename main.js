@@ -1,7 +1,7 @@
 require("dotenv").config();
 const Discord = require("discord.js");
 const fs = require("fs");
-const Queue = require("queue-fifo");
+const Queue = require("./util/queue");
 
 const client = new Discord.Client();
 
@@ -17,7 +17,6 @@ let botState = {
     saleData: {
         queue: new Queue(),
         store: 0,
-        regOrders: [],
         reqBuffer: [],
         totalSales: 0,
     },
@@ -69,12 +68,17 @@ client.on("message", (message) => {
             client.commands.get("salg").execute(message, args, botState);
             break;
         case "kø":
+        case "forran":
             client.commands.get("kø").execute(message, args, botState);
+            break;
+        case "totalkø":
+            client.commands.get("totalkø").execute(message, args, botState);
             break;
         case "info":
             client.commands.get("info").execute(message, args);
             break;
         case "hjelp":
+        case "help":
             client.commands.get("hjelp").execute(message, args, botState);
             break;
     }

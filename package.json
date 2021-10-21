@@ -4,7 +4,8 @@
   "description": "Discord bot for vaffelOrakel UiB",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,6 @@
     "discord.js": "^12.3.1",
     "dotenv": "^10.0.0",
     "google-spreadsheet": "^3.0.13",
-    "googleapis": "^39.2.0",
-    "queue-fifo": "^0.2.6"
+    "googleapis": "^39.2.0"
   }
 }

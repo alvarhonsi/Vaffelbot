@@ -1,6 +1,6 @@
 module.exports = {
     name: "kø",
-    description: "show current queue",
+    description: "show queue in front of you",
     execute(message, args, botState) {
         const { saleOngoing, saleData } = botState
         const { queue } = saleData
@@ -10,6 +10,12 @@ module.exports = {
             return;
         }
 
-        message.channel.send(`${queue.size()} stk i kø.`);
+        const index = queue.findIndex(({name, discordID, date}) => discordID === message.author.id);
+        // If you're not currently in the queue, do the same as the "totalkø" command
+        if (index < 0) {
+            message.channel.send(`Det er ${queue.size()} stk i køen.`);
+        } else {
+            message.channel.send(index === 0 ? "Du er først i køen!" : `Det er ${index} forran deg i køen.`);
+        }
     },
 };
