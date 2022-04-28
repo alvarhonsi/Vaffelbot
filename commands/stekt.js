@@ -47,5 +47,7 @@ module.exports = {
             saleData.store = store + incr;
             await signalWaiting(waiting);
         }
+
+        message.react('🧇');
     },
 };
