@@ -15,7 +15,7 @@ module.exports = {
         if (index < 0) {
             message.channel.send(`Det er ${queue.size()} stk i køen.`);
         } else {
-            message.reply(index === 0 ? "Du er først i køen!" : `Det er ${index} foran deg i køen.`);
+            message.reply(index === 0 ? "du er først i køen!" : `det er ${index} foran deg i køen.`);
         }
     },
 };
