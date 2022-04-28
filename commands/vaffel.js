@@ -15,7 +15,7 @@ module.exports = {
 
         const regOrder = async (message) => {
             const vaffelAvailable = 0 < store;
-            message.channel.send(
+            message.reply(
                 `Takk for bestillingen ${message.author.username}! ${vaffelAvailable ? "En vaffel er allerede klar til deg!" : `Du er nummer ${queue.size()+1} i køen.`}`
             );
 
@@ -36,7 +36,7 @@ module.exports = {
         };
 
         if (!botState.saleOngoing) {
-            message.channel.send("Vi har ikke åpnet for bestillinger.");
+            message.reply("Vi har ikke åpnet for bestillinger.");
         } else if (queue.some(({ name, discordID, date }) => discordID === message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."

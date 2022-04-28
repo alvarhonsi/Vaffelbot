@@ -10,6 +10,6 @@ module.exports = {
             return;
         }
 
-        message.channel.send(`${queue.size()} stk i kø.`);
+        message.channel.send(`Det er ${queue.size()} stk i køen.`);
     },
 };
