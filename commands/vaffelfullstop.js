@@ -1,6 +1,6 @@
 module.exports = {
-    name: "vaffelstop",
-    description: "command for announcing the end of a waffle-sale",
+    name: "vaffelfullstop",
+    description: "Clears sale data and queue",
     async execute(message, args, botState) {
         const { clear_sale_data } = require("../util/state_functions");
         const { adminRole, saleOngoing } = botState
@@ -22,9 +22,9 @@ module.exports = {
         }
 
         botState.takingOrders = false
-        message.channel.send(
-            "@here\nSalget er nå stoppet. \n" +
-            "Velkommen igjen neste Vaffel-Torsdag!"
-        );
+        botState.saleOngoing = false
+        clear_sale_data(botState);
+
+        message.react('🧇');
     },
 };

@@ -9,7 +9,6 @@ module.exports = {
         let {
             queue,
             store,
-            reqBuffer,
             totalSales,
         } = saleData;
 
@@ -35,15 +34,11 @@ module.exports = {
             }
         };
 
-        if (!botState.saleOngoing) {
+        if (!botState.takingOrders) {
             message.reply("vi har ikke åpnet for bestillinger.");
         } else if (queue.some(({ name, discordID, date }) => discordID === message.author.id)) {
             message.author.send(
                 "Du har allerede en registrert bestilling."
-            );
-        } else if (reqBuffer.includes(message.author.id)) {
-            message.author.send(
-                "Du må vente litt lengre før du bruker vaffel kommandoen igjen"
             );
         } else {
             await regOrder(message);
