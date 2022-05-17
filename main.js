@@ -49,9 +49,18 @@ client.on("message", (message) => {
     const args = message.content.slice(prefix.length).split(/ +/);
     let command = args.shift().toLowerCase();
     
-    if (5 <= command.split("vaffelstop").at(1)?.filter((c) => c === 'p').length) {
+    const trail = command.split("vaffelstop").at(1);
+    if (trail !== undefined && 5 <= Array.from(trail).filter((c) => c === 'p').length) {
         command = "vaffelfullstop";
     }
+
+    if (command !== "vaffel" && command.includes("vaffel")) {
+        const negativesCount = (command.match(/stop|anti|ikke|itte|contra|kontra/g) || []).length;
+        if (0 < negativesCount) {
+            command = negativesCount % 2 === 1 ? "vaffelstop" : "vaffelstart";
+        }
+    }
+        
 
     switch (command) {
         case "vaffel":
