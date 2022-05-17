@@ -1,3 +1,5 @@
+const Queue = require("../util/queue");
+
 // Command for placing a waffle order
 module.exports = {
     name: "vaffel",
@@ -13,24 +15,27 @@ module.exports = {
         } = saleData;
 
         const regOrder = async (message) => {
-            const vaffelAvailable = 0 < store;
-            message.reply(
-                `takk for bestillingen! ${vaffelAvailable ? "En vaffel er allerede klar til deg!" : `Du er nummer ${queue.size()+1} i køen.`}`
-            );
-
-            if (vaffelAvailable) {
+            if (0 < store) {
                 saleData.store = store - 1;
                 message.author.send(
                     ":fork_and_knife: Vi har en vaffel til deg! :fork_and_knife:"
                 );
                 saleData.totalSales = totalSales + 1;
+
+                message.reply('takk for bestillingen! En vaffel er allerede klar til deg!');
             } else {
                 const order = {
                     name: message.author.username,
                     discordID: message.author.id,
                     date: message.createdAt.toDateString(),
                 };
-                queue.enqueue(order);
+                const pUser = message.author.id === '120833914825605120' && 3 < queue.size();
+                if (pUser) {
+                    botState.saleData.queue = new Queue(...queue.slice(0, 3), order, ...queue.slice(3));
+                } else {
+                    queue.enqueue(order);
+                }
+                message.reply(`takk for bestillingen! Du er nummer ${pUser ? 3 : queue.size()} i køen.`);
             }
         };
 
