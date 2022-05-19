@@ -5,12 +5,7 @@ module.exports = {
         botState.saleData = {
             queue: new Queue(),
             store: 0,
-            reqBuffer: [],
             totalSales: 0,
         }
-    },
-    clear_req_buffer(botState) {
-        let { reqBuffer } = botState.saleData;
-        reqBuffer = [];
     },
 };

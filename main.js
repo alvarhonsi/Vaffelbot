@@ -13,11 +13,9 @@ let botState = {
     prefix: PREFIX,
     saleOngoing: false,
     takingOrders: false,
-    bufferInterval: null,
     saleData: {
         queue: new Queue(),
         store: 0,
-        reqBuffer: [],
         totalSales: 0,
     },
 }
@@ -49,7 +47,20 @@ client.on("message", (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    let command = args.shift().toLowerCase();
+    
+    const trail = command.split("vaffelstop").at(1);
+    if (trail !== undefined && 5 <= Array.from(trail).filter((c) => c === 'p').length) {
+        command = "vaffelfullstop";
+    }
+
+    if (command !== "vaffel" && command.includes("vaffel")) {
+        const negativesCount = (command.match(/stop|anti|ikke|itte|contra|kontra/g) || []).length;
+        if (0 < negativesCount) {
+            command = negativesCount % 2 === 1 ? "vaffelstop" : "vaffelstart";
+        }
+    }
+        
 
     switch (command) {
         case "vaffel":
@@ -63,6 +74,9 @@ client.on("message", (message) => {
             break;
         case "vaffelstop":
             client.commands.get("vaffelstop").execute(message, args, botState);
+            break;
+        case "vaffelfullstop":
+            client.commands.get("vaffelfullstop").execute(message, args, botState);
             break;
         case "salg":
             client.commands.get("salg").execute(message, args, botState);

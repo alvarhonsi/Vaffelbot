@@ -9,7 +9,7 @@ module.exports = {
             message.author.send("--Illegal use of vaffelstart--");
             return;
         }
-        if (botState.saleOngoing) {
+        if (botState.saleOngoing && botState.takingOrders) {
             message.channel.send("Vaffelsalget pågår");
             return;
         }
@@ -20,10 +20,6 @@ module.exports = {
             );
             return
         }
-        
-        botState.bufferInterval = setInterval(async () => {
-            clear_req_buffer(botState);
-        }, 1 * 120000);
 
         clear_sale_data(botState);
         botState.saleOngoing = true;
