@@ -26,7 +26,7 @@ module.exports = {
         botState.takingOrders = true;
 
         message.channel.send(`
-        @here\nHei allesammen! Vaffelstekingen er nå satt igang!
+        Hei allesammen! Vaffelstekingen er nå satt igang!
         > $vaffel : Bestill en vaffel.
         > $hjelp : Oversikt over kommandoer.
         `);
